@@ -149,6 +149,21 @@ function Index() {
       return;
     }
 
+    if (quantity > 1000) {
+      setError("A quantidade máxima permitida é 1000 números.");
+      return;
+    }
+
+    if (min < 1) {
+      setError("O valor mínimo deve ser pelo menos 1.");
+      return;
+    }
+
+    if (max > 999999) {
+      setError("O valor máximo permitido é 999.999.");
+      return;
+    }
+
     if (min > max) {
       setError("O valor mínimo deve ser menor ou igual ao máximo.");
       return;
@@ -247,6 +262,7 @@ function Index() {
                 type="number"
                 inputMode="numeric"
                 min={1}
+                max={1000}
                 value={quantityInput}
                 onChange={(e) => setQuantityInput(e.target.value)}
                 className="border-input bg-background text-lg font-medium text-foreground transition-all focus:border-transparent focus:ring-2 focus:ring-primary"
@@ -260,6 +276,8 @@ function Index() {
                 id="min"
                 type="number"
                 inputMode="numeric"
+                min={1}
+                max={999999}
                 value={minInput}
                 onChange={(e) => setMinInput(e.target.value)}
                 className="border-input bg-background text-lg font-medium text-foreground transition-all focus:border-transparent focus:ring-2 focus:ring-primary"
@@ -273,6 +291,8 @@ function Index() {
                 id="max"
                 type="number"
                 inputMode="numeric"
+                min={1}
+                max={999999}
                 value={maxInput}
                 onChange={(e) => setMaxInput(e.target.value)}
                 className="border-input bg-background text-lg font-medium text-foreground transition-all focus:border-transparent focus:ring-2 focus:ring-primary"
@@ -324,17 +344,22 @@ function Index() {
               <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Resultado Recente</span>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
-              {latestNumbers.map((n, i) => (
-                <div
-                  key={n}
-                  style={animationsEnabled ? { animationDelay: `${i * 70}ms` } : undefined}
-                  className={`flex h-14 w-14 items-center justify-center rounded-full border border-gold bg-card shadow-sm ${
-                    animationsEnabled ? "animate-scale-in" : ""
-                  }`}
-                >
-                  <span className="font-heading text-2xl font-bold text-foreground">{n}</span>
-                </div>
-              ))}
+              {latestNumbers.map((n, i) => {
+                const digits = String(n).length;
+                const sizeClass =
+                  digits >= 6 ? "text-xs" : digits >= 4 ? "text-sm" : digits >= 3 ? "text-lg" : "text-2xl";
+                return (
+                  <div
+                    key={n}
+                    style={animationsEnabled ? { animationDelay: `${i * 70}ms` } : undefined}
+                    className={`flex h-14 w-14 items-center justify-center rounded-full border border-gold bg-card shadow-sm ${
+                      animationsEnabled ? "animate-scale-in" : ""
+                    }`}
+                  >
+                    <span className={`font-heading ${sizeClass} font-bold text-foreground`}>{n}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
