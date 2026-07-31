@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useHydrated } from "@/hooks/use-hydrated";
-import logoAsset from "@/assets/ceak-conchal-logo.png.asset.json";
+import logoUrl from "@/assets/ceak-conchal-logo.png";
 
 const HISTORY_KEY = "ceak-sorteio-history";
 const SETTINGS_KEY = "ceak-sorteio-settings";
@@ -230,7 +230,7 @@ function Index() {
 
         {/* Header & Logo */}
         <div className="flex flex-col items-center pt-10 pb-6">
-          <img src={logoAsset.url} alt="Ceak Conchal" className="mb-3 h-20 w-auto object-contain" />
+          <img src={logoUrl} alt="Ceak Conchal" className="mb-3 h-20 w-auto object-contain" />
           <h1 className="font-heading text-3xl font-bold uppercase tracking-tight text-foreground">Ceak Conchal</h1>
           <p className="text-sm font-medium uppercase tracking-widest text-primary">Sorteador de Números</p>
         </div>
